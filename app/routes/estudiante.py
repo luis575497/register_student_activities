@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, request, flash
 from app.forms.forms import RegistrarEstudianteForm
 from app import db
 from app.schemas.estudiante import Estudiante
-from flask_login import login_required
+from flask_login import login_required, current_user
 from werkzeug.wrappers import Response
 
 @app.route("/estudiante", methods=["POST", "GET"])
@@ -49,7 +49,8 @@ def estudiante(id: int):
     if request.method == "GET":
         context = {
         "estudiante" : Estudiante.query.get(id),
-        "form_estudiante" : RegistrarEstudianteForm()
+        "form" : RegistrarEstudianteForm(),
+        "bibliotecario": current_user
         }
         return render_template("estudiante.html", **context)
     
