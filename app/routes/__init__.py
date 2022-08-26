@@ -36,3 +36,4 @@ from app.routes.actividades import *
 from app.routes.buscador import *
 from app.routes.auth import *
 from app.routes.certificado import *
+from app.routes.bibliotecario import *

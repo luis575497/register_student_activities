@@ -34,3 +34,12 @@ class Buscador(FlaskForm):
 class Login(FlaskForm):
     cedula = StringField("Cédula", validators=[InputRequired(),Length(min=10, max=10, message="La cédula debe tener 10 dígitos")])
     password = PasswordField("Contraseña", validators=[InputRequired(),])
+
+
+class BibliotecarioForm(FlaskForm):
+    nombre = StringField("Nombre y Apellidos", validators=[InputRequired()])
+    cedula = StringField("Cédula", validators=[InputRequired(),Length(min=10, max=10, message="La cédula debe tener 10 dígitos")])
+    email = StringField("Email", validators=[InputRequired(), Email(message="Correo incorrecto")])
+    campus = StringField("Campus",validators=[InputRequired()])
+    puesto = StringField("Puesto", validators=[InputRequired()])
+    password = PasswordField("Password")

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+              <form action="{{ url_for('update_bibliotecario') }}" method="POST">
+                <div class="form-group">
+                  <h4>Bibliotecario</h4>
+                  {{ form.hidden_tag() }}
+                  {{ form.nombre.label(class="form-label") }}
+                  {{ form.nombre(class="form-control", value=bibliotecario.nombre) }}
+                </div>
+                <div class="form-group">
+                  {{ form.cedula.label(class="form-label") }}
+                  {{ form.cedula(class="form-control", value=bibliotecario.cedula) }}
+                </div>
+                <div class="form-group">
+                  {{ form.email.label(class="form-label") }}
+                  {{ form.email(class="form-control", value=bibliotecario.email) }}
+                </div>
+                <div class="form-group">
+                  {{ form.campus.label(class="form-label") }}
+                  {{ form.campus(class="form-control", value=bibliotecario.campus) }}
+                </div>
+                <div class="form-group">
+                  {{ form.puesto.label(class="form-label") }}
+                  {{ form.puesto(class="form-control", value=bibliotecario.puesto) }}
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Actualizar</button>
+                  </div>
+                  <div class="col">
+                    <a href="{{url_for('bibliotecario')}}" class="btn btn-danger btn-lg btn-block">Cancelar</a>
+                  </div>
+                </div>
+            </form>
+            </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+{% endblock %}

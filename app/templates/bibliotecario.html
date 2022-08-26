@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+</br>
+<div class="jumbotron jumbotron-fluid pb-4">
+    <div class="container">
+      <h1 class="display-4">{{bibliotecario.nombre}}</h1>
+      <hr class="my-4">
+      <p class="mb-1"><strong>Email: </strong>{{bibliotecario.email}}</p>
+      <p class="mb-1"><strong>Cédula: </strong>{{bibliotecario.cedula}}</p>
+      <p class="mb-1"><strong>Biblioteca: </strong>Campus {{bibliotecario.campus}}</p>
+      <p class="mb-1"><strong>Puesto: </strong>{{bibliotecario.puesto}}</p>
+      </br>
+      <a class="btn btn-primary btn-lg" href="{{url_for('update_bibliotecario')}}" role="button">Actualizar Perfil</a>
+      <a class="btn btn-danger btn-lg" href="{{url_for('reset_password')}}" role="button">Cambiar Contraseña</a>
+    </div>
+  </div>
+{% endblock %}
