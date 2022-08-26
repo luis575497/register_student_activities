@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 mt-4">
+        <form class="form" action="{{url_for('search')}}" method="POST">
+              {{ buscador.hidden_tag() }}
+          <div class="row mb-4" >
+            <div class="col" style="padding: 0">
+              {{buscador.cedula(class="form-control form-control-lg")}}
+            </div>
+            <div class="col-sm-auto" style="padding: 0;">
+              <button type="submit" class="btn btn-dark btn-lg" ><i class="fa fa-search"></i></button>
+              </div>
+          </div> 
+        </form>
+    </div>
+</div>
+  <div class="row">
+    <div class="col-sm-9">
+      <table class="table">  
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Cedula</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo </th>
+            <th scope="col">Actividad </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for estudent in lista_estudiantes %}
+            <tr>
+              <th scope="row"> {{estudent.id}} </th>
+              <td>{{estudent.cedula}}</td>
+              <td>{{estudent.nombre}}</td>
+              <td>{{estudent.email}}</td>
+              <td class="text-center">
+                <a href="/view_activities/{{estudent.id}}"><i class="fas fa-plus-square fa-lg"></i></a>              
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-3 ">
+      <a href="{{url_for('add_student')}}" class="btn btn-block btn-dark"> Ingresar Nuevo Estudiante</a>
+    </div>
+  </div>
+{% endblock %}

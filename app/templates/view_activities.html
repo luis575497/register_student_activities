@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-sm-12">
+        <h2>{{student.nombre}} <a href="{{url_for('estudiante', id=student.id)}}"><i class="fas fa-edit fa-1x"></i></a></h2>
+    </div>
+    <div class="col-sm-8  mt-3">
+        <table class="table table-dark">
+            <tbody>
+                <tr>
+                    <th scope="row" class="p-1"><p class="m-1">Cédula:</p></th>
+                    <td class="p-1"><p class="m-1">{{student.cedula}}</p></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="p-1"><p class="m-1">Facultad:</p></th>
+                    <td class="p-1"><p class="m-1">{{student.facultad}}</p></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="p-1"><p class="m-1">Carrera:</p></th>
+                    <td class="p-1"><p class="m-1">{{student.carrera}}</p></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="p-1"><p class="m-1">Email:</p></th>
+                    <td class="p-1"><p class="m-1">{{student.email}}</p></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="p-1"><p class="m-1">Teléfono:</p></th>
+                    <td class="p-1"><p class="m-1">{{student.phone}}</p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-4  mt-3">
+        <h1> <i class="fas fa-business-time"></i> {{horas_realizadas}} Horas</h1>
+        <h5> Tiempo total trabajado</h5>
+        <p class="text-danger"><strong>Tiempo restante: {{total_horas - horas_realizadas}} horas de {{total_horas}} horas</strong></p>
+        </br>
+        {% if horas_realizadas >= total_horas %}
+            <a href="{{ url_for('crear_certificado', id=student.id) }}" class="btn btn-success btn-block text-white btn-lg" role="button" aria-disabled="true">Descargar Certificado</a>
+        {% else %}
+            <button class="btn btn-success btn-block text-white btn-lg" type="button" aria-disabled="true" disabled>Descargar Certificado</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-sm-12">
+        <h4>Listado de actividades realizadas</h4>
+    </div>
+    <div class="col-sm-9">
+        <table class="table table-striped">
+            <tbody>
+                <thead class="thead">
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Actividad</th>
+                    <th scope="col">Horas</th>
+                    <th scope="col">Bibliotecario</th>
+                    <th scope="col">Acción</th>
+                </thead>
+                {% for actividad in actividades %}
+                    <tr>
+                        <th>{{actividad.fecha}} </br> {{actividad.hora_inicio}} {{actividad.hora_fin}} </th>
+                        <td>{{actividad.nombre_actividad}}</td>
+                        <td>{{actividad.cantidad_de_horas}}</td>
+                        <td>{{actividad.bibliotecario.nombre}}</td>
+                        <td><a href="{{ url_for('edit_activity', id_est=student.id, id_activity=actividad.id) }}"><i class="fas fa-edit"></i></a>
+                            <a href="{{ url_for('remove_activity', id_est=student.id, id_activity=actividad.id) }}"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>    
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-3">
+        {% if horas_realizadas < total_horas %}
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ url_for('add_activity', id_est=student.id) }}" method="POST">
+                            {{ form_actividades.hidden_tag() }}
+                        <div class="form-group">
+                            {{ form_actividades.nombre.label(class="form-label") }}
+                            {{ form_actividades.nombre(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_actividades.fecha.label(class="form-label") }}
+                            {{ form_actividades.fecha(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_actividades.hora_entrada.label(class="form-label") }}
+                            {{ form_actividades.hora_entrada(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_actividades.hora_salida.label(class="form-label") }}
+                            {{ form_actividades.hora_salida(class="form-control") }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Agregar Actividad</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <div></div>
+        {% endif %}
+</div>
+{% endblock %}

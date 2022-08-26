@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form action="{{ url_for('edit_activity', id_est=id_est, id_activity=actividad.id ) }}" method="POST">
+                    <div class="form-group">
+                        {{ form_actividades.nombre.label(class="form-label") }}
+                        {{ form_actividades.nombre(class="form-control", value=actividad.nombre_actividad) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_actividades.fecha.label(class="form-label") }}
+                        {{ form_actividades.fecha(class="form-control", value=actividad.fecha) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_actividades.hora_entrada.label(class="form-label") }}
+                        {{ form_actividades.hora_entrada(class="form-control", value=actividad.hora_inicio[:5]) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_actividades.hora_salida.label(class="form-label") }}
+                        {{ form_actividades.hora_salida(class="form-control", value=actividad.hora_fin[:5]) }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Actualizar Actividad</button>
+                    <a href="/view_activities/{{id_est}}" class="btn btn-danger btn-block btn-lg">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+{% endblock %}

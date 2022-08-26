@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
+{% endblock %}
+<div class="row mt-5">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <form action="{{ url_for('login')}}" method="POST" class="form-signin">
+          <p class="text-center"><i class="fas fa-user-circle fa-6x"></i></p>
+          <h4 class="h3 mb-3 font-weight-normal text-center">Iniciar Sesión</h4>
+          {{ form.hidden_tag() }}
+          {{ form.cedula(class="form-control", placeholder="Cédula") }}
+          {{ form.password(class="form-control", placeholder="Contraseña") }}
+          <button type="submit" class="btn btn-lg btn-dark btn-block mt-3">INGRESAR</button>
+        </form>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+{% endblock %}
+
