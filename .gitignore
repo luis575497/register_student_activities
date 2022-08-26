@@ -1,0 +1,6 @@
+venv/**/*
+app/__pycache__/**/*
+app/form/__pycache__/**/*
+app/routes/__pycache__/**/*
+app/schemas/__pycache__/**/*
+app/utils/__pycache__/**/*
