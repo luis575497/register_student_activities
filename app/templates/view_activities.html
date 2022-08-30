@@ -49,8 +49,7 @@
         <h4>Listado de actividades realizadas</h4>
     </div>
     <div class="col-sm-9">
-        <table class="table table-striped">
-            <tbody>
+        <table class="table table-striped" id="actividades">
                 <thead class="thead">
                     <th scope="col">Fecha</th>
                     <th scope="col">Actividad</th>
@@ -58,7 +57,8 @@
                     <th scope="col">Bibliotecario</th>
                     <th scope="col">Acción</th>
                 </thead>
-                {% for actividad in actividades %}
+                <tbody>
+                    {% for actividad in actividades %}
                     <tr>
                         <th>{{actividad.fecha}} </br> {{actividad.hora_inicio}} {{actividad.hora_fin}} </th>
                         <td>{{actividad.nombre_actividad}}</td>
@@ -68,8 +68,8 @@
                             <a href="{{ url_for('remove_activity', id_est=student.id, id_activity=actividad.id) }}"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>    
-                {% endfor %}
-            </tbody>
+                    {% endfor %}
+                </tbody>
         </table>
     </div>
     <div class="col-sm-3">
@@ -102,4 +102,12 @@
             <div></div>
         {% endif %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#actividades').DataTable();
+    });
+  </script>
 {% endblock %}

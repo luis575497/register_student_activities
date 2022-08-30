@@ -43,10 +43,10 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row mt-5">
   <div class="col">
-    <h3 class="">Actividades supervisadas en los últimos 30 días</h3>
-    <table class="table">
+    <h3 class="h3 text-center text-uppercase">Actividades supervisadas en los últimos 30 días</h3>
+    <table class="table" id="data">
       <thead>
         <th scope="col">Estudiante</th>
         <th scope="col">Actividad</th>
@@ -66,4 +66,12 @@
     </table>
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable();
+    });
+  </script>
 {% endblock %}
