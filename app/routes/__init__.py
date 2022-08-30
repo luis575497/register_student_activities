@@ -25,10 +25,9 @@ def view_activities(id: int):
         "student" : student,
         "actividades" : student.actividades,
         "form_actividades" : IngresarActividad(),
-        "horas_realizadas" : reduce(lambda inicio, actividad: actividad.cantidad_de_horas + inicio, student.actividades, 0),
+        "horas_realizadas" : student.horas_trabajadas(),
         "total_horas": student.total_horas
-        }
-
+        }      
         return render_template("view_activities.html", **context)
 
 from app.routes.estudiante import *

@@ -1,14 +1,28 @@
+from calendar import month
 from contextlib import redirect_stderr
 from app import app, db
 from flask_login import current_user
 from flask import render_template, request, flash, redirect, url_for
 from app.forms.forms import BibliotecarioForm
 from flask_login import login_required
+from app.schemas.actividad import Actividad
+from datetime import datetime, timedelta
+from functools import reduce
+
 
 @app.route("/bibliotecario", methods=["GET"])
 @login_required
 def bibliotecario():
-    return render_template("bibliotecario.html", bibliotecario=current_user)
+    fecha_actual = datetime.now()
+    actividades = Actividad.query.filter(Actividad.fecha > fecha_actual - timedelta(days=30)).filter_by(bibliotecario_id = current_user.id).all()
+    context = {
+    "actividades" : actividades,
+    "horas_supervisadas": reduce(lambda inicio, actividad: actividad.cantidad_de_horas + inicio, actividades, 0),
+    "bibliotecario": current_user,
+    "estudiantes": len({actividad.estudiante_id for actividad in actividades}),
+    }
+    app.logger.info(context["estudiantes"])
+    return render_template("bibliotecario.html", **context)
 
 
 @app.route("/bibliotecario/update", methods=["GET","POST"])

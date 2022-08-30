@@ -1,4 +1,6 @@
 from app import db, UserMixin
+from app.schemas.actividad import Actividad
+from datetime import datetime
 
 class Bibliotecario(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -13,7 +15,7 @@ class Bibliotecario(UserMixin, db.Model):
     def __repr__(self) -> str:
         return '<Bibliotecario %r>' % self.nombre
 
-    def __init__(self, cedula, nombre, email, campus, password):
+    def __init__(self, cedula, nombre, email, campus, password) -> None:
         self.cedula = cedula
         self.nombre = nombre
         self.email = email

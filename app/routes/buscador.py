@@ -8,7 +8,7 @@ from werkzeug.wrappers import Response
 def search()  -> Response:
     cedula = request.form["cedula"]
     estudiante = Estudiante.query.filter_by(cedula=cedula).first()
-    if estudiante != None:
+    if estudiante is not None:
         return redirect(url_for("view_activities", id=estudiante.id))
     else:
         flash("No existe el número de cédula ingresado","error")

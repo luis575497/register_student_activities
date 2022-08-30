@@ -2,7 +2,7 @@
 
 {% block content %}
 </br>
-<div class="jumbotron jumbotron-fluid pb-4">
+<div class="jumbotron jumbotron-fluid pb-4 mb-2">
     <div class="container">
       <h1 class="display-4">{{bibliotecario.nombre}}</h1>
       <hr class="my-4">
@@ -10,9 +10,60 @@
       <p class="mb-1"><strong>Cédula: </strong>{{bibliotecario.cedula}}</p>
       <p class="mb-1"><strong>Biblioteca: </strong>Campus {{bibliotecario.campus}}</p>
       <p class="mb-1"><strong>Puesto: </strong>{{bibliotecario.puesto}}</p>
-      </br>
-      <a class="btn btn-primary btn-lg" href="{{url_for('update_bibliotecario')}}" role="button">Actualizar Perfil</a>
-      <a class="btn btn-danger btn-lg" href="{{url_for('reset_password')}}" role="button">Cambiar Contraseña</a>
+      <div class="row mb-3 mt-3">
+        <div class="col-xl-3 col-sm-2">
+          <div class="card bg-success text-white h-100">
+            <div class="card-body bg-success">
+              <h6 class="text-uppercase">Horas supervisadas    (30 días)</h6>
+              <h1 class="display-4">{{horas_supervisadas}} <i class="fas fa-clock"></i></h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-2">
+          <div class="card bg-info text-white h-100">
+            <div class="card-body bg-info">
+              <h6 class="text-uppercase">Estudiantes supervisados (30 días)</h6>
+              <h1 class="display-4">{{estudiantes}} <i class="fas fa-user"></i></h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-2">
+          <div class="card bg-warning text-white h-100">
+            <div class="card-body bg-warning">
+              <h6 class="text-uppercase"></h6>
+              <h1 class="display-4"></i></h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-2">
+          <a class="btn btn-primary btn-lg mb-2 btn-block" href="{{url_for('update_bibliotecario')}}" role="button">Actualizar Perfil</a>
+          <a class="btn btn-danger btn-lg btn-block" href="{{url_for('reset_password')}}" role="button">Cambiar Contraseña</a>
+        </div>
+      </div>
     </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <h3 class="">Actividades supervisadas en los últimos 30 días</h3>
+    <table class="table">
+      <thead>
+        <th scope="col">Estudiante</th>
+        <th scope="col">Actividad</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Horas</th>
+      </thead>
+      <tbody>
+        {% for actividad in actividades %}
+          <tr>
+            <th>{{actividad.estudiante.nombre}}</th>
+            <td>{{actividad.nombre_actividad}}</td>
+            <td>{{actividad.fecha}}</td>
+            <td>{{actividad.cantidad_de_horas}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
+</div>
 {% endblock %}

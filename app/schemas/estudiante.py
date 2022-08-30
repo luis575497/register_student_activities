@@ -1,4 +1,5 @@
 from app import db
+from functools import reduce
 
 class Estudiante(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -12,10 +13,10 @@ class Estudiante(db.Model):
     actividades = db.relationship("Actividad", backref="estudiante")
     total_horas = db.Column(db.Integer(), nullable=False)
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '<Estudiante %r>' % self.nombre
 
-    def __init__(self, cedula, email, facultad, carrera, curso, phone, nombre,total_horas):
+    def __init__(self, cedula, email, facultad, carrera, curso, phone, nombre,total_horas) -> None:
         self.cedula = cedula
         self.email = email
         self.facultad = facultad
@@ -24,3 +25,6 @@ class Estudiante(db.Model):
         self.phone = phone
         self.nombre = nombre
         self.total_horas = total_horas
+    
+    def horas_trabajadas(self) -> float:
+        return reduce(lambda inicio, actividad: actividad.cantidad_de_horas + inicio, self.actividades, 0)

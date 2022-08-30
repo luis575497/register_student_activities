@@ -13,7 +13,7 @@ def add_student():
         estudiante_cedula = Estudiante.query.filter_by(cedula = form_new_student["cedula"]).first()
         estudiante_email  = Estudiante.query.filter_by(email = form_new_student["email"]).first()
         
-        if (estudiante_cedula == None) and (estudiante_email == None):
+        if (estudiante_cedula is None) and (estudiante_email is None):
             new_Student = Estudiante(
                 nombre = form_new_student["nombre"],
                 cedula = form_new_student["cedula"],
