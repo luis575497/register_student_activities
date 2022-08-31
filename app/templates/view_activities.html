@@ -34,8 +34,8 @@
     <div class="col-sm-4  mt-3">
         <h1> <i class="fas fa-business-time"></i> {{horas_realizadas}} Horas</h1>
         <h5> Tiempo total trabajado</h5>
-        <p class="text-danger"><strong>Tiempo restante: {{total_horas - horas_realizadas}} horas de {{total_horas}} horas</strong></p>
-        </br>
+        <p class="text-danger mb-4"><strong>Tiempo restante: {{total_horas - horas_realizadas}} horas de {{total_horas}} horas</strong></p>
+        
         {% if horas_realizadas >= total_horas %}
             <a href="{{ url_for('crear_certificado', id=student.id) }}" class="btn btn-success btn-block text-white btn-lg" role="button" aria-disabled="true">Descargar Certificado</a>
         {% else %}
@@ -79,22 +79,25 @@
                     <form action="{{ url_for('add_activity', id_est=student.id) }}" method="POST">
                             {{ form_actividades.hidden_tag() }}
                         <div class="form-group">
-                            {{ form_actividades.nombre.label(class="form-label") }}
+                            {{ form_actividades.nombre.label(class="form-label mt-3") }}
                             {{ form_actividades.nombre(class="form-control") }}
                         </div>
                         <div class="form-group">
-                            {{ form_actividades.fecha.label(class="form-label") }}
+                            {{ form_actividades.fecha.label(class="form-label mt-3") }}
                             {{ form_actividades.fecha(class="form-control") }}
                         </div>
                         <div class="form-group">
-                            {{ form_actividades.hora_entrada.label(class="form-label") }}
+                            {{ form_actividades.hora_entrada.label(class="form-label mt-3") }}
                             {{ form_actividades.hora_entrada(class="form-control") }}
                         </div>
                         <div class="form-group">
-                            {{ form_actividades.hora_salida.label(class="form-label") }}
+                            {{ form_actividades.hora_salida.label(class="form-label mt-3") }}
                             {{ form_actividades.hora_salida(class="form-control") }}
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Agregar Actividad</button>
+                        <div class="d-grid gap-20">
+                            <button type="submit" class="btn btn-primary btn-block mt-3 ">Agregar Actividad</button>
+                        </div>
+                        
                     </form>
                 </div>
             </div>

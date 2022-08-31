@@ -8,23 +8,29 @@
             <div class="card-body">
                 <form action="{{ url_for('edit_activity', id_est=id_est, id_activity=actividad.id ) }}" method="POST">
                     <div class="form-group">
-                        {{ form_actividades.nombre.label(class="form-label") }}
+                        {{ form_actividades.nombre.label(class="form-label mt-3") }}
                         {{ form_actividades.nombre(class="form-control", value=actividad.nombre_actividad) }}
                     </div>
                     <div class="form-group">
-                        {{ form_actividades.fecha.label(class="form-label") }}
+                        {{ form_actividades.fecha.label(class="form-label mt-3") }}
                         {{ form_actividades.fecha(class="form-control", value=actividad.fecha) }}
                     </div>
                     <div class="form-group">
-                        {{ form_actividades.hora_entrada.label(class="form-label") }}
+                        {{ form_actividades.hora_entrada.label(class="form-label mt-3") }}
                         {{ form_actividades.hora_entrada(class="form-control", value=actividad.hora_inicio[:5]) }}
                     </div>
                     <div class="form-group">
-                        {{ form_actividades.hora_salida.label(class="form-label") }}
+                        {{ form_actividades.hora_salida.label(class="form-label mt-3") }}
                         {{ form_actividades.hora_salida(class="form-control", value=actividad.hora_fin[:5]) }}
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Actualizar Actividad</button>
-                    <a href="/view_activities/{{id_est}}" class="btn btn-danger btn-block btn-lg">Cancelar</a>
+                    <div class="row mt-3">
+                        <div class="col d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Actualizar Actividad</button>
+                        </div>
+                        <div class="col d-grid gap-2">
+                            <a href="/view_activities/{{id_est}}" class="btn btn-danger btn-block btn-lg">Cancelar</a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

@@ -4,6 +4,7 @@ from flask_fontawesome import FontAwesome
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_login import LoginManager, UserMixin
+from flask_avatars import Avatars
 
 app = Flask(__name__)
 
@@ -20,6 +21,9 @@ login_manager.init_app(app)
 
 # Font Awesome
 fa = FontAwesome(app)
+
+# Avatars
+avatars = Avatars(app)
 
 # Vista de Administrador para agregar bibliotecario
 admin = Admin(app)

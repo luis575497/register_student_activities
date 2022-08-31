@@ -8,7 +8,7 @@ from flask_login import login_required
 from app.schemas.actividad import Actividad
 from datetime import datetime, timedelta
 from functools import reduce
-
+import hashlib
 
 @app.route("/bibliotecario", methods=["GET"])
 @login_required
@@ -20,6 +20,7 @@ def bibliotecario():
     "horas_supervisadas": reduce(lambda inicio, actividad: actividad.cantidad_de_horas + inicio, actividades, 0),
     "bibliotecario": current_user,
     "estudiantes": len({actividad.estudiante_id for actividad in actividades}),
+    "hash_name":  hashlib.md5(current_user.nombre.lower().encode('utf-8')).hexdigest(),
     }
     app.logger.info(context["estudiantes"])
     return render_template("bibliotecario.html", **context)

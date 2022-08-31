@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
 
     <!-- FontAwesome -->
     {{fontawesome_html()}}
@@ -21,28 +21,29 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand text-white" href="/">60 Horas</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">.
-          {% if current_user.is_authenticated %}
-          <li class="nav-item active">
-            <a class="nav-link" href="{{url_for('bibliotecario')}}">Perfil <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" aria-disabled="true"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
-          </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0">
-          <a class="btn btn-outline-light my-2 my-sm-0" href="{{url_for('logout')}}">Cerrar Sesión</a>
+      <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/">60 Horas</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">.
+            {% if current_user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('bibliotecario')}}">Perfil <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" aria-disabled="true"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+            </li>
+          </ul>
+          <div class="d-flex my-2 my-lg-0">
+            <a class="btn btn-secondary me-sm-2" href="{{url_for('logout')}}">Cerrar Sesión</a>
+          </div>
+          {% endif %}
         </div>
-        {% endif %}
       </div>
     </nav>
     <div class="container">

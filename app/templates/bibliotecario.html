@@ -2,14 +2,21 @@
 
 {% block content %}
 </br>
-<div class="jumbotron jumbotron-fluid pb-4 mb-2">
+<div class="jumbotron jumbotron-fluid pb-4 pt-4 mb-2" style="background-color: #fff; box-shadow: 8px 8px 16px rgb(165 177 198 / 80%), -8px -8px 16px rgb(255 255 255 / 80%);">
     <div class="container">
-      <h1 class="display-4">{{bibliotecario.nombre}}</h1>
-      <hr class="my-4">
-      <p class="mb-1"><strong>Email: </strong>{{bibliotecario.email}}</p>
-      <p class="mb-1"><strong>Cédula: </strong>{{bibliotecario.cedula}}</p>
-      <p class="mb-1"><strong>Biblioteca: </strong>Campus {{bibliotecario.campus}}</p>
-      <p class="mb-1"><strong>Puesto: </strong>{{bibliotecario.puesto}}</p>
+      <div class="row">
+        <div class="col-xl-8">
+          <h1 class="display-4">{{bibliotecario.nombre}}</h1>
+          <hr class="my-4">
+          <p class="mb-1 "><i class="fas fa-envelope"></i><span class="text-muted f-w-400">  {{bibliotecario.email}}</span></p>
+          <p class="mb-1"><i class="fas fa-id-card"></i><span class="text-muted f-w-400">  {{bibliotecario.cedula}}</span></p>
+          <p class="mb-1"><i class="fas fa-building"></i><span class="text-muted f-w-400">  Campus {{bibliotecario.campus}}</span></p>
+          <p class="mb-1"><i class="fas fa-users"></i></i><span class="text-muted f-w-400">  {{bibliotecario.puesto}}</span></p>
+        </div>
+        <div class="col-xl-4">
+          <img class="img-thumbnail rounded-circle mx-auto d-block" style="box-shadow: 8px 8px 16px rgb(165 177 198 / 80%), -8px -8px 16px rgb(255 255 255 / 80%);" src="{{ avatars.robohash(hash_name) }}">
+        </div>
+      </div>
       <div class="row mb-3 mt-3">
         <div class="col-xl-3 col-sm-2">
           <div class="card bg-success text-white h-100">
@@ -28,16 +35,10 @@
           </div>
         </div>
         <div class="col-xl-3 col-sm-2">
-          <div class="card bg-warning text-white h-100">
-            <div class="card-body bg-warning">
-              <h6 class="text-uppercase"></h6>
-              <h1 class="display-4"></i></h1>
-            </div>
+          <div class="d-grid gap-2">
+            <a class="btn btn-primary btn-lg" href="{{url_for('update_bibliotecario')}}" role="button">Actualizar Perfil</a>
+            <a class="btn btn-danger btn-lg" href="{{url_for('reset_password')}}" role="button">Cambiar Contraseña</a>
           </div>
-        </div>
-        <div class="col-xl-3 col-sm-2">
-          <a class="btn btn-primary btn-lg mb-2 btn-block" href="{{url_for('update_bibliotecario')}}" role="button">Actualizar Perfil</a>
-          <a class="btn btn-danger btn-lg btn-block" href="{{url_for('reset_password')}}" role="button">Cambiar Contraseña</a>
         </div>
       </div>
     </div>

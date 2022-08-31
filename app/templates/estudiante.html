@@ -10,40 +10,40 @@
                 <div class="form-group">
                   <h4>Nuevo estudiante</h4>
                   {{ form.hidden_tag() }}
-                  {{ form.nombre.label(class="form-label") }}
+                  {{ form.nombre.label(class="form-label mt-3") }}
                   {{ form.nombre(class="form-control", value=estudiante.nombre) }}
                 </div>
                 <div class="form-group">
-                  {{ form.cedula.label(class="form-label") }}
+                  {{ form.cedula.label(class="form-label mt-3") }}
                   {{ form.cedula(class="form-control", value=estudiante.cedula) }}
                 </div>
                 <div class="form-group">
-                  {{ form.email.label(class="form-label") }}
+                  {{ form.email.label(class="form-label mt-3") }}
                   {{ form.email(class="form-control", value=estudiante.email) }}
                 </div>
                 <div class="form-group">
-                  {{ form.facultad.label(class="form-label") }}
+                  {{ form.facultad.label(class="form-label mt-3") }}
                   {{ form.facultad(class="form-control", value=estudiante.facultad) }}
                 </div>
                 <div class="form-group">
-                  {{ form.carrera.label(class="form-label") }}
+                  {{ form.carrera.label(class="form-label mt-3") }}
                   {{ form.carrera(class="form-control", value=estudiante.carrera) }}
                 </div>
                 <div class="form-group">
-                  {{ form.curso.label(class="form-label") }}
+                  {{ form.curso.label(class="form-label mt-3") }}
                   {{ form.curso(class="form-control", value=estudiante.curso) }}
                 </div>
                 <div class="form-group">
-                  {{ form.phone.label(class="form-label") }}
+                  {{ form.phone.label(class="form-label mt-3") }}
                   {{ form.phone(class="form-control", value=estudiante.phone) }}
                 </div>
-                  {{ form.total_horas.label(class="form-label") }}
+                  {{ form.total_horas.label(class="form-label mt-3") }}
                   {{ form.total_horas(class="form-control", value=estudiante.total_horas) }}
                 <div class="row mt-3">
-                  <div class="col">
+                  <div class="col d-grid gap-2">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Actualizar estudiante</button>
                   </div>
-                  <div class="col">
+                  <div class="col d-grid gap-2">
                     <a href="/view_activities/{{estudiante.id}}" class="btn btn-danger btn-lg btn-block">Cancelar</a>
                   </div>
                 </div>
