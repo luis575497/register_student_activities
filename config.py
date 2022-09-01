@@ -1,3 +1,4 @@
+from datetime import timedelta
 
 class Config(object):
     DEBUG = False
@@ -8,6 +9,7 @@ class Config(object):
     FLASK_DEBUG = 'development'
     SECRET_KEY = 'sdfksdj156165gnsdfnsdonfs'
     TEMPLATES_FOLDER = 'templates'
+    PERMANENT_SESSION_LIFETIME =  timedelta(minutes=5)
 
 class ProductionConfig(Config):
     DEBUG = False

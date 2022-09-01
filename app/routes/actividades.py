@@ -28,7 +28,7 @@ def add_activity(id_est: int) -> Response:
 
     # Agregar la actividad a la Base de datos si mla hora de entrada es menor  a la hora de salida
     if hora_salida < hora_entrada:
-        app.logger.error("La hora de entrada debe ser menor a la hora de salida")
+        app.logger.error(f"{current_user.email} - La hora de entrada debe ser menor a la hora de salida")
         flash("La hora de entrada debe ser menor a la hora de salida", "error")
         return redirect(url_for("view_activities", id=id_est))
     
@@ -44,7 +44,7 @@ def add_activity(id_est: int) -> Response:
             )
         db.session.add(new_activitie)
         db.session.commit()
-        app.logger.info("Actividad agregada correctamente")
+        app.logger.info(f"{current_user.email} - Actividad agregada correctamente")
         flash("Actividad agregada correctamente","success")
         return redirect(url_for("view_activities", id=id_est))
 
@@ -58,7 +58,7 @@ def remove_activity(id_est: int, id_activity: int) -> Response:
     """
     db.session.delete(Actividad.query.get(id_activity))
     db.session.commit()
-    app.logger.info("Actividad Eliminada Correctamente")
+    app.logger.info(f"{current_user.email} - Actividad Eliminada Correctamente")
     flash("Actividad Eliminada Correctamente","success")
     return redirect(url_for("view_activities", id=id_est))
 
@@ -79,6 +79,7 @@ def edit_activity(id_est: int, id_activity: int)  -> Response:
         bibliotecario = current_user
 
         if salida < entrada:
+            app.logger.info(f"{current_user.email} - La hora de entrada debe ser menor a la hora de salida")
             flash("La hora de entrada debe ser menor a la hora de salida", "error")
             return redirect(url_for("edit_activity", id_est=id_est, id_activity=id_activity))
         else:
@@ -92,6 +93,7 @@ def edit_activity(id_est: int, id_activity: int)  -> Response:
             actividad.bibliotecario = bibliotecario
 
             db.session.commit()
+            app.logger.info(f"{current_user.email} - Actividad actualizada correctamente")
             flash("Actividad actualizada correctamente", "success")
             
             return redirect(url_for("view_activities", id=id_est ))

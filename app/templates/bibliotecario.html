@@ -38,6 +38,39 @@
           <div class="d-grid gap-2">
             <a class="btn btn-primary btn-lg" href="{{url_for('update_bibliotecario')}}" role="button">Actualizar Perfil</a>
             <a class="btn btn-danger btn-lg" href="{{url_for('reset_password')}}" role="button">Cambiar Contraseña</a>
+            <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#exampleModal"> Informe </button>
+            
+            <!-- Modal --> 
+            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Seleccione el Mes del Informe</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{{url_for('informe')}}" method="POST">
+                      <div class="form-group">
+                        {{ form.hidden_tag() }}
+                        {{ form.mes.label(class="form-label mt-3") }}
+                        {{ form.mes(class="form-control") }}
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="col d-grid gap-2">
+                      <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                    <div class="col d-grid gap-2">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modalend --> 
+
           </div>
         </div>
       </div>

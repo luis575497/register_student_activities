@@ -3,7 +3,7 @@ from contextlib import redirect_stderr
 from app import app, db
 from flask_login import current_user
 from flask import render_template, request, flash, redirect, url_for
-from app.forms.forms import BibliotecarioForm
+from app.forms.forms import BibliotecarioForm, SeleccionarMes
 from flask_login import login_required
 from app.schemas.actividad import Actividad
 from datetime import datetime, timedelta
@@ -21,6 +21,7 @@ def bibliotecario():
     "bibliotecario": current_user,
     "estudiantes": len({actividad.estudiante_id for actividad in actividades}),
     "hash_name":  hashlib.md5(current_user.nombre.lower().encode('utf-8')).hexdigest(),
+    "form": SeleccionarMes(),
     }
     app.logger.info(context["estudiantes"])
     return render_template("bibliotecario.html", **context)
@@ -63,3 +64,10 @@ def reset_password():
         db.session.commit()
         flash("Contraseña actualizada exitosamente","success")
         return redirect(url_for("logout"))
+
+@login_required
+@app.route("/bibliotecario/informe", methods=["POST"])
+def informe():
+    if request.method == "POST":
+        mes = request.form["mes"]
+        return f"Mes: {mes}"

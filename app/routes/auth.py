@@ -6,7 +6,6 @@ from app.forms.forms import Login
 from werkzeug.security import check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.wrappers import Response
-from datetime import timedelta
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -23,12 +22,16 @@ def login() -> Response:
         if bibliotecario:
             if check_password_hash(bibliotecario.password, datos["password"]):
                 login_user(bibliotecario, remember=True)
+                session.permanent = True
+                app.logger.info(f"{current_user.email} - Usuario logueado correctamente")
                 return redirect(url_for("index"))
             else:
                 flash("Contraseña incorrecta","error")
+                app.logger.info(f"Contraseña incorrecta")
                 return redirect(url_for("login"))
         else:
             flash("NO existe un usuario con el número de cédula ingresado","error")
+            app.logger.info(f"NO existe un usuario con el número de cédula ingresado")
             return redirect(url_for("login"))
 
 @app.route("/logout", methods = ['GET'])
@@ -36,10 +39,3 @@ def login() -> Response:
 def logout() -> Response:
     logout_user()
     return redirect(url_for("login"))
-
-@app.before_request
-def before_request() -> None:
-    session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=5)
-    session.modified = True
-    g.user = current_user

@@ -5,48 +5,86 @@
     <div class="col-sm-12">
         <h2>{{student.nombre}} <a href="{{url_for('estudiante', id=student.id)}}"><i class="fas fa-edit fa-1x"></i></a></h2>
     </div>
-    <div class="col-sm-8  mt-3">
-        <table class="table table-dark">
-            <tbody>
-                <tr>
-                    <th scope="row" class="p-1"><p class="m-1">Cédula:</p></th>
-                    <td class="p-1"><p class="m-1">{{student.cedula}}</p></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="p-1"><p class="m-1">Facultad:</p></th>
-                    <td class="p-1"><p class="m-1">{{student.facultad}}</p></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="p-1"><p class="m-1">Carrera:</p></th>
-                    <td class="p-1"><p class="m-1">{{student.carrera}}</p></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="p-1"><p class="m-1">Email:</p></th>
-                    <td class="p-1"><p class="m-1">{{student.email}}</p></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="p-1"><p class="m-1">Teléfono:</p></th>
-                    <td class="p-1"><p class="m-1">{{student.phone}}</p></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-sm-8  mt-3 card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Cédula</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{student.cedula}}</p>
+                </div>
+              </div>
+              <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{student.email}}</p>
+                </div>
+              </div>
+              <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Facultad</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{student.facultad}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Carrera</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{student.carrera}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Teléfono</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{student.phone}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Horas</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{student.total_horas}}</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-4  mt-3">
-        <h1> <i class="fas fa-business-time"></i> {{horas_realizadas}} Horas</h1>
-        <h5> Tiempo total trabajado</h5>
-        <p class="text-danger mb-4"><strong>Tiempo restante: {{total_horas - horas_realizadas}} horas de {{total_horas}} horas</strong></p>
+    <div class="col-sm-4  mt-3 px-4">
+        <h5 class="m-b-30 f-w-700"> Tiempo total trabajado</h5>
+        <h1 class="text-success"> <i class="fas fa-business-time  text-muted"></i> {{horas_realizadas}} Horas</h1>  
+        <p class="text-danger mb-4"><strong><span class="text-muted">Tiempo restante:</span> {{total_horas - horas_realizadas}} horas</strong></p>
         
-        {% if horas_realizadas >= total_horas %}
-            <a href="{{ url_for('crear_certificado', id=student.id) }}" class="btn btn-success btn-block text-white btn-lg" role="button" aria-disabled="true">Descargar Certificado</a>
-        {% else %}
-            <button class="btn btn-success btn-block text-white btn-lg" type="button" aria-disabled="true" disabled>Descargar Certificado</a>
-        {% endif %}
+        <div class="mb-4 progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:{{ (horas_realizadas / total_horas)*100 }}%;" aria-valuenow="{{horas_realizadas}}" aria-valuemin="0" aria-valuemax="{{total_horas}}">{{ ((horas_realizadas / total_horas)*100)|round(1) }}%</div>
+        </div>
+
+        </br>
+        <div class="d-grid gap-2">
+            {% if horas_realizadas >= total_horas %}
+                <a href="{{ url_for('crear_certificado', id=student.id) }}" class="btn btn-success btn-block text-white btn-lg" role="button" aria-disabled="true">Descargar Certificado</a>
+            {% else %}
+                <button class="btn btn-success btn-block text-white btn-lg" type="button" aria-disabled="true" disabled>Descargar Certificado</a>
+            {% endif %}
+        </div>
     </div>
 </div>
 
-<div class="row mt-4">
+<div class="row mt-5">
     <div class="col-sm-12">
-        <h4>Listado de actividades realizadas</h4>
+        <h3 class="mb-4">Listado de actividades realizadas</h4>
     </div>
     <div class="col-sm-9">
         <table class="table table-striped" id="actividades">

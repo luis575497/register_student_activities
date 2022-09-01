@@ -22,6 +22,7 @@ class IngresarActividad(FlaskForm):
                                                 ("Constatación de inventario", "Constatación de inventario"),
                                                 ("Traslado de documentos", "Traslado de documentos"),
                                                 ("Elaboración de listado de libros", "Elaboración de listado de libros"),
+                                                ("Elaboración de inventario de libros", "Elaboración de inventario de libros"),
                                                 ], 
                                                 validators=[InputRequired()])
     fecha = DateField("Fecha", format='%d-%m-%Y',validators=[InputRequired()])
@@ -43,3 +44,19 @@ class BibliotecarioForm(FlaskForm):
     campus = StringField("Campus",validators=[InputRequired()])
     puesto = StringField("Puesto", validators=[InputRequired()])
     password = PasswordField("Password")
+
+class SeleccionarMes(FlaskForm):
+    mes = SelectField("Actividades", choices=[("01", "Enero"),
+                                                ("02", "Febrero"),
+                                                ("03", "Marzo"),
+                                                ("04", "Abril"),
+                                                ("05", "Mayo"),
+                                                ("06", "Junio"),
+                                                ("07", "Julio"),
+                                                ("08", "Agosto"),
+                                                ("09", "Septiembre"),
+                                                ("10", "Octubre"),
+                                                ("11", "Noviembre"),
+                                                ("12", "Diciembre"),
+                                                ], 
+                                                validators=[InputRequired()])

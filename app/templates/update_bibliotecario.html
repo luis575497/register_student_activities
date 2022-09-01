@@ -10,30 +10,30 @@
                 <div class="form-group">
                   <h4>Bibliotecario</h4>
                   {{ form.hidden_tag() }}
-                  {{ form.nombre.label(class="form-label") }}
+                  {{ form.nombre.label(class="form-label mt-3") }}
                   {{ form.nombre(class="form-control", value=bibliotecario.nombre) }}
                 </div>
                 <div class="form-group">
-                  {{ form.cedula.label(class="form-label") }}
+                  {{ form.cedula.label(class="form-label mt-3") }}
                   {{ form.cedula(class="form-control", value=bibliotecario.cedula) }}
                 </div>
                 <div class="form-group">
-                  {{ form.email.label(class="form-label") }}
+                  {{ form.email.label(class="form-label mt-3") }}
                   {{ form.email(class="form-control", value=bibliotecario.email) }}
                 </div>
                 <div class="form-group">
-                  {{ form.campus.label(class="form-label") }}
+                  {{ form.campus.label(class="form-label mt-3") }}
                   {{ form.campus(class="form-control", value=bibliotecario.campus) }}
                 </div>
                 <div class="form-group">
-                  {{ form.puesto.label(class="form-label") }}
+                  {{ form.puesto.label(class="form-label mt-3") }}
                   {{ form.puesto(class="form-control", value=bibliotecario.puesto) }}
                 </div>
                 <div class="row mt-3">
-                  <div class="col">
+                  <div class="col d-grid gap-2">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Actualizar</button>
                   </div>
-                  <div class="col">
+                  <div class="col d-grid gap-2">
                     <a href="{{url_for('bibliotecario')}}" class="btn btn-danger btn-lg btn-block">Cancelar</a>
                   </div>
                 </div>
