@@ -28,8 +28,10 @@ avatars = Avatars(app)
 # Vista de Administrador para agregar bibliotecario
 admin = Admin(app)
 from app.schemas.bibliotecario import Bibliotecario
-from app.schemas.actividad import Actividad
+from app.schemas.estudiante import Estudiante
+
 admin.add_views(ModelView(Bibliotecario, db.session))
+admin.add_views(ModelView(Estudiante, db.session))
 
 # cargar los eventos
 from app.utils.events import hash_user_password

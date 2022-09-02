@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, redirect, url_for, request, flash
-from app.forms.forms import RegistrarEstudianteForm
+from app.forms.forms import RegistrarEstudianteForm, IngresarActividad
 from app import db
 from app.schemas.estudiante import Estudiante
 from flask_login import login_required, current_user
@@ -74,3 +74,19 @@ def edit_estudiante(id: int) -> Response:
         db.session.commit()
         flash("Estudiante actualizado correctamente","success")
         return redirect(url_for("view_activities", id=estudiante.id))
+
+
+
+@app.route("/view_activities/<int:id>", methods=["GET"])
+@login_required
+def view_activities(id: int):
+    student = Estudiante.query.get(id)
+    if request.method == "GET":
+        context = {
+        "student" : student,
+        "actividades" : student.actividades,
+        "form_actividades" : IngresarActividad(),
+        "horas_realizadas" : student.horas_trabajadas(),
+        "total_horas": student.total_horas
+        }      
+        return render_template("view_activities.html", **context)

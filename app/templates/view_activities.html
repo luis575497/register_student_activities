@@ -9,16 +9,16 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Cédula</p>
+                  <p class="mb-0 text-muted"><strong>Cédula</strong></p>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-9 ">
                   <p class="text-muted mb-0">{{student.cedula}}</p>
                 </div>
               </div>
               <hr>
             <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Email</p>
+                <div class="col-sm-3 text-muted">
+                  <p class="mb-0"><strong>Email</strong></p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{student.email}}</p>
@@ -26,8 +26,8 @@
               </div>
               <hr>
             <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Facultad</p>
+                <div class="col-sm-3 text-muted">
+                  <p class="mb-0"><strong>Facultad</strong></p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{student.facultad}}</p>
@@ -35,8 +35,8 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Carrera</p>
+                <div class="col-sm-3 text-muted">
+                  <p class="mb-0"><strong>Carrera</strong></p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{student.carrera}}</p>
@@ -44,8 +44,8 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Teléfono</p>
+                <div class="col-sm-3 text-muted">
+                  <p class="mb-0"><strong>Teléfono</strong></p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{student.phone}}</p>
@@ -53,8 +53,8 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Horas</p>
+                <div class="col-sm-3 text-muted">
+                  <p class="mb-0"><strong>Horas</strong></p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{student.total_horas}}</p>
@@ -67,11 +67,13 @@
         <h1 class="text-success"> <i class="fas fa-business-time  text-muted"></i> {{horas_realizadas}} Horas</h1>  
         <p class="text-danger mb-4"><strong><span class="text-muted">Tiempo restante:</span> {{total_horas - horas_realizadas}} horas</strong></p>
         
-        <div class="mb-4 progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:{{ (horas_realizadas / total_horas)*100 }}%;" aria-valuenow="{{horas_realizadas}}" aria-valuemin="0" aria-valuemax="{{total_horas}}">{{ ((horas_realizadas / total_horas)*100)|round(1) }}%</div>
+        <div class="mb-4 progress blue">
+            <div class="progress-bar" style="background:#1a4966; width:{{ (horas_realizadas / total_horas)*100 }}%;">
+              <div class="progress-value">{{ ((horas_realizadas / total_horas)*100)|round() }}%</div>
+            </div>
         </div>
 
-        </br>
+        <br></br>
         <div class="d-grid gap-2">
             {% if horas_realizadas >= total_horas %}
                 <a href="{{ url_for('crear_certificado', id=student.id) }}" class="btn btn-success btn-block text-white btn-lg" role="button" aria-disabled="true">Descargar Certificado</a>

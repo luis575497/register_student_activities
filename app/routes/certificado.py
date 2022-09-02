@@ -1,5 +1,5 @@
 from app import app
-from flask import redirect, url_for, flash, send_file
+from flask import send_file
 from app.forms.forms import IngresarActividad
 from app.schemas.estudiante import Estudiante
 from app.utils.certificado import generar_certificado
