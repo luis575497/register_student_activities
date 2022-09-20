@@ -4,3 +4,4 @@ app/forms/__pycache__/**/*
 app/routes/__pycache__/**/*
 app/schemas/__pycache__/**/*
 app/utils/__pycache__/**/*
+--pycache--/**/*
