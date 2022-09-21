@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <div class="row mt-4">
     <div class="col-sm-12">
@@ -64,16 +65,16 @@
     </div>
     <div class="col-sm-4  mt-3 px-4">
         <h5 class="m-b-30 f-w-700"> Tiempo total trabajado</h5>
-        <h1 class="text-success"> <i class="fas fa-business-time  text-muted"></i> {{horas_realizadas}} Horas</h1>  
+        <h1 class="text-success"> <i class="fas fa-business-time  text-muted"></i> {{horas_realizadas}} Horas</h1>
         <p class="text-danger mb-4"><strong><span class="text-muted">Tiempo restante:</span> {{total_horas - horas_realizadas}} horas</strong></p>
-        
+
         <div class="mb-4 progress blue">
             <div class="progress-bar" style="background:#1a4966; width:{{ (horas_realizadas / total_horas)*100 }}%;">
               <div class="progress-value">{{ ((horas_realizadas / total_horas)*100)|round() }}%</div>
             </div>
         </div>
 
-        <br></br>
+        </br>
         <div class="d-grid gap-2">
             {% if horas_realizadas >= total_horas %}
                 <a href="{{ url_for('crear_certificado', id=student.id) }}" class="btn btn-success btn-block text-white btn-lg" role="button" aria-disabled="true">Descargar Certificado</a>
@@ -107,7 +108,7 @@
                         <td><a href="{{ url_for('edit_activity', id_est=student.id, id_activity=actividad.id) }}"><i class="fas fa-edit"></i></a>
                             <a href="{{ url_for('remove_activity', id_est=student.id, id_activity=actividad.id) }}"><i class="fas fa-trash-alt"></i></a>
                         </td>
-                    </tr>    
+                    </tr>
                     {% endfor %}
                 </tbody>
         </table>
@@ -137,7 +138,7 @@
                         <div class="d-grid gap-20">
                             <button type="submit" class="btn btn-primary btn-block mt-3 ">Agregar Actividad</button>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

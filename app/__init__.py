@@ -11,11 +11,11 @@ app = Flask(__name__)
 # Configuración de la aplicación
 app.config.from_object("config.DevelopmentConfig")
 
-#Cargar Base de Datos
+# Cargar Base de Datos
 db = SQLAlchemy(app)
 from app.schemas import *
 
-#Login Manager
+# Login Manager
 login_manager = LoginManager()
 login_manager.init_app(app)
 

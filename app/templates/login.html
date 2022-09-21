@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 {% block customCSS %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
@@ -16,10 +17,9 @@
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-lg btn-dark btn-block mt-3">INGRESAR</button>
           </div>
-          
+
         </form>
     </div>
     <div class="col-sm-4"></div>
 </div>
 {% endblock %}
-

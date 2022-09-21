@@ -5,14 +5,17 @@ from app.schemas.estudiante import Estudiante
 from functools import reduce
 from flask_login import current_user, login_required
 
+
 @app.route("/", methods=["GET"])
 @login_required
 def index():
     if request.method == "GET":
         context = {
-        "buscador" : Buscador(),
-        "lista_estudiantes" : Estudiante.query.order_by(Estudiante.id.desc()).limit(10).all()
-        } 
+            "buscador": Buscador(),
+            "lista_estudiantes": Estudiante.query.order_by(Estudiante.id.desc())
+            .limit(10)
+            .all(),
+        }
         return render_template("index.html", **context)
 
 

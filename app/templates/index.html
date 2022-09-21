@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <div class="row">
     <div class="col-sm-12 mt-4">
@@ -12,13 +13,13 @@
             <div class="col-sm-auto" style="padding: 0;">
               <button type="submit" class="btn btn-dark btn-lg" ><i class="fa fa-search"></i></button>
               </div>
-          </div> 
+          </div>
         </form>
     </div>
 </div>
   <div class="row">
     <div class="col-sm-9">
-      <table class="table">  
+      <table class="table">
         <thead class="thead-dark">
           <tr>
             <th scope="col">ID</th>
@@ -36,7 +37,7 @@
               <td>{{estudent.nombre}}</td>
               <td>{{estudent.email}}</td>
               <td class="text-center">
-                <a href="/view_activities/{{estudent.id}}"><i class="fas fa-plus-square fa-lg"></i></a>              
+                <a href="/view_activities/{{estudent.id}}"><i class="fas fa-plus-square fa-lg"></i></a>
               </td>
             </tr>
           {% endfor %}

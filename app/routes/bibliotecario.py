@@ -74,6 +74,7 @@ def reset_password():
         bibliotecario.password = datos["password"]
         db.session.commit()
         flash("Contraseña actualizada exitosamente", "success")
+        app.logger.info(f"Contraseña actualizada exitosamente - {current_user.email}")
         return redirect(url_for("logout"))
 
 
@@ -93,4 +94,5 @@ def informe():
         resp = make_response(df.to_csv(index=False))
         resp.headers["Content-Disposition"] = "attachment; filename=Informe.csv"
         resp.headers["Content-Type"] = "text/csv"
+        app.logger.info(f"Informe generado exitosamente - {current_user.email}")
         return resp
