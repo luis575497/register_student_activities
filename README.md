@@ -1,17 +1,10 @@
 # Registro de actividades
 
 # Requisitos
-- mysql 
+- mysql
 
-# Instalación 
-Para instalar todas las dependencias del proyecto cree un entrorno virtual en la carpeta del proyecto
-```bash
-pip venv venv
-```
-y mediante el archivo `requeriments.txt` instale todas las librerías necesarias para el proyecto.
-```bash
-pip install -r requeriments.txt
-```
+# Instalación
+
 # Configuración
 Antes de ejecutar el proyecto deberá configurar la conexión con la base de datos en el archivo `config.py` y modificar la propiedad `SQLALCHEMY_DATABASE_URI` en donde:
 - `mysql+pymysql` : es el conector de python para mysql

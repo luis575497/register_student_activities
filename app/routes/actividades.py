@@ -1,11 +1,20 @@
-from app import app
+"""
+Submódulo de Actividades (routes)
+=================================
+
+Este módulo contiene todas las rutas definidas para realizar con una actividad:
+- Agregar una nueva activiadad
+- Eliminar una actividad existente
+- Obtener los datos de una actividad existente
+- Editar una actividad existente
+"""
+
+from datetime import datetime
+from app import app, db
 from flask import render_template, redirect, url_for, request, flash
 from app.forms.forms import IngresarActividad
-from app import db
 from app.schemas.estudiante import Estudiante
-from app.schemas.bibliotecario import Bibliotecario
 from app.schemas.actividad import Actividad
-from datetime import datetime
 from flask_login import current_user, login_required
 from werkzeug.wrappers import Response
 
@@ -14,9 +23,25 @@ from werkzeug.wrappers import Response
 @login_required
 def add_activity(id_est: int) -> Response:
     """
-    Agregar una actividad realizada por un estudiante, tiene como parámetro de entrada la
-    id del estudiante, obtiene los datos del formulario enviado y toma como bibliotecario
-    al usuario que se encuentra logueado
+    Agregar una actividad
+
+    Cuando se envía una petición POST hacia la ruta ``/actividad/<int:id_est>/`` se agrega
+    una actividad realizada por un estudiante a la base de datos con los datos del
+    formulario enviado y toma como bibliotecario al usuario que se encuentra logueado.
+
+    Parameters
+    ----------
+    id_est : int
+        Identificador único del estudiante en la base de datos
+
+    Returns
+    -------
+    Response
+        Redirección hacia la ruta vinculada con la función ``view_activities``
+
+    Notes
+    -----
+    Para ejecutar esta ruta se requiere que el usuario se encuentra autenticado en el sistema
     """
 
     # Obtener todos los datos de la actividad
@@ -56,9 +81,28 @@ def add_activity(id_est: int) -> Response:
 @login_required
 def remove_activity(id_est: int, id_activity: int) -> Response:
     """
-    Elimina una actividad de a base de datos tomando como entrada la id de la actividad y del estudiante.
-    Regresa a la página de actividades del estudiante
+    Eliminar una actividad
+
+    Cuando se envía una petición POST hacia la ruta ``/activity/<int:id_est>/<int:id_activity>/remove``
+    se elimina la actividad identificada de la base de datos y se envía una notificación al usuario.
+
+    Parameters
+    ----------
+    id_est : int
+        Identificador único del estudiante en la base de datos
+    id_activity : int
+        Identificador único de la actividad en la base de datos
+
+    Returns
+    -------
+    Response
+        Redirección hacia la ruta vinculada con la función ``view_activities``
+
+    Notes
+    -----
+    Para ejecutar esta ruta se requiere que el usuario se encuentra autenticado en el sistema
     """
+
     db.session.delete(Actividad.query.get(id_activity))
     db.session.commit()
     app.logger.info(f"{current_user.email} - Actividad Eliminada Correctamente")
@@ -66,12 +110,68 @@ def remove_activity(id_est: int, id_activity: int) -> Response:
     return redirect(url_for("view_activities", id=id_est))
 
 
+@app.route("/activity/<int:id_est>/<int:id_activity>/view", methods=["GET"])
+@login_required
+def view_activity(id_est: int, id_activity: int) -> str:
+    """
+    Visualizar los datos de una actividad
+
+    Cuando se envía una petición GET hacia la ruta ``/activity/<int:id_est>/<int:id_activity>/view``
+    se recopilan los datos vinculados a la actividad señalada y se renderiza la plantilla Jinja2
+    ``activity.html``.
+
+    Parameters
+    ----------
+    id_est : int
+        Identificador único del estudiante en la base de datos
+    id_activity : int
+        Identificador único de la actividad en la base de datos
+
+    Returns
+    -------
+    str
+        Renderizado de la plantilla ``activity.html`` con los datos obtenidos previamente
+
+    Notes
+    -----
+    Para ejecutar esta ruta se requiere que el usuario se encuentra autenticado en el sistema
+    """
+    if request.method == "GET":
+        context = {
+            "form_actividades": IngresarActividad(),
+            "actividad": Actividad.query.get(id_activity),
+            "id_est": id_est,
+        }
+        return render_template("activity.html", **context)
+
+
 @app.route("/activity/<int:id_est>/<int:id_activity>/edit", methods=["POST", "GET"])
 @login_required
 def edit_activity(id_est: int, id_activity: int) -> Response:
-    """ "
-    POST - Recibe los datos del formulario enviado y actualiza con los nuevos datos la actividad
-    GET -  Envía el formulario de actividades y los datos de actividad a editar
+    """
+    Actualizar una actividad existente
+
+    Cuando se envía una petición POST hacia la ruta ``/activity/<int:id_est>/<int:id_activity>/edit``
+    se obtienen los datos enviados en el formulario, se realizan las comprobaciones en cuanto a la
+    hora de salida y hora de entrada y se actualizan los datos de la actividad señalada en la base
+    de datos.
+
+    Parameters
+    ----------
+    id_est : int
+        Identificador único del estudiante en la base de datos
+    id_activity : int
+        Identificador único de la actividad en la base de datos
+
+    Returns
+    -------
+    Response
+        Redirección hacia la ruta vinculada con la función ``view_activities`` con el parámetro de
+        ``id`` del estudiante
+
+    Notes
+    -----
+    Para ejecutar esta ruta se requiere que el usuario se encuentra autenticado en el sistema
     """
     if request.method == "POST":
         actividades = request.form
@@ -105,11 +205,3 @@ def edit_activity(id_est: int, id_activity: int) -> Response:
             flash("Actividad actualizada correctamente", "success")
 
             return redirect(url_for("view_activities", id=id_est))
-
-    if request.method == "GET":
-        context = {
-            "form_actividades": IngresarActividad(),
-            "actividad": Actividad.query.get(id_activity),
-            "id_est": id_est,
-        }
-        return render_template("activity.html", **context)

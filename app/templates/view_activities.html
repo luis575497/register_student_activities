@@ -105,7 +105,7 @@
                         <td>{{actividad.nombre_actividad}}</td>
                         <td>{{actividad.cantidad_de_horas}}</td>
                         <td>{{actividad.bibliotecario.nombre}}</td>
-                        <td><a href="{{ url_for('edit_activity', id_est=student.id, id_activity=actividad.id) }}"><i class="fas fa-edit"></i></a>
+                        <td><a href="{{ url_for('view_activity', id_est=student.id, id_activity=actividad.id) }}"><i class="fas fa-edit"></i></a>
                             <a href="{{ url_for('remove_activity', id_est=student.id, id_activity=actividad.id) }}"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
