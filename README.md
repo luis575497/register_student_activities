@@ -16,17 +16,3 @@ La base de datos indicada deberá no contener ninguna tabla
 Se debe crear un usuario mediante la ruta `/admin` y agregar un nuevo bibliotecario
 El bibliotecario ingresará con su número de cédula y la contraseña creada.
 Se podrá crear y modificar estudiantes, además de poder agregar, modificar y eliminar las actividades realizadas
-
-# Desarrollo
-### Formularios
-Los formularios utilizados en la aplicación se encuentran definidos en la carpeta forms y el archivo `forms.py`
-
-### Páginas
-Las rutas de acceso a las páginas se encuentran dentro de la carpeta `routes` en donde se dividen en dependencia de la función que realizán:
-- `__init__.py`: ruta index
-- `actividades.py`: creación, modificación y eliminación de actividades
-- `auth.py`: proceso de autenticación
-- `bibliotecario.py`: perfil de bibliotecario, actualizar los datos, cambiar contraseña y generar informes
-- `buscador.py`: busqueda por cedula de los estudiantes
-- `errors.py`: error 401, 404
-- `estudiante.py`: añadr estudiantes, modificar los datos, visializar las actividades del estudiante
