@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+              {% if estudiante %}
+              <!-- Si sen envian los datos del usuario se renderiza la plantilla para editarlo-->
+                <form action="{{ url_for('edit_estudiante', id=estudiante.id) }}" method="POST">
+                  <div class="form-group">
+                        <h4>Nuevo estudiante</h4>
+                        {{ form.hidden_tag() }}
+                        {{ form.nombre.label(class="form-label mt-3") }}
+                        {{ form.nombre(class="form-control", value= estudiante.nombre) }}
+                      </div>
+                      <div class="form-group">
+                        {{ form.cedula.label(class="form-label mt-3") }}
+                        {{ form.cedula(class="form-control", value=estudiante.cedula) }}
+                      </div>
+                      <div class="form-group">
+                        {{ form.email.label(class="form-label mt-3") }}
+                        {{ form.email(class="form-control", value=estudiante.email) }}
+                      </div>
+                      <div class="form-group">
+                        {{ form.facultad.label(class="form-label mt-3") }}
+                        {{ form.facultad(class="form-control", value=estudiante.facultad) }}
+                      </div>
+                      <div class="form-group">
+                        {{ form.carrera.label(class="form-label mt-3") }}
+                        {{ form.carrera(class="form-control", value=estudiante.carrera) }}
+                      </div>
+                      <div class="form-group">
+                        {{ form.curso.label(class="form-label mt-3") }}
+                        {{ form.curso(class="form-control", value=estudiante.curso) }}
+                      </div>
+                      <div class="form-group">
+                        {{ form.phone.label(class="form-label mt-3") }}
+                        {{ form.phone(class="form-control", value=estudiante.phone) }}
+                      </div>
+                        {{ form.total_horas.label(class="form-label mt-3") }}
+                        {{ form.total_horas(class="form-control", value=estudiante.total_horas) }}
+                      <div class="row mt-3">
+                        <div class="col d-grid gap-2">
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">Actualizar estudiante</button>
+                        </div>
+                        <div class="col d-grid gap-2">
+                          <a href="/view_activities/{{estudiante.id}}" class="btn btn-danger btn-lg btn-block">Cancelar</a>
+                        </div>
+                  </div>
+              </form>
+            {% else %}
+              <form action="{{ url_for('add_student') }}" method="POST">
+                <div class="form-group">
+                  <h4>Nuevo estudiante</h4>
+                  {{ form.hidden_tag() }}
+                  {{ form.nombre.label(class="form-label") }}
+                  {{ form.nombre(class="form-control") }}
+                </div>
+                <div class="form-group">
+                  {{ form.cedula.label(class="form-label mt-3") }}
+                  {{ form.cedula(class="form-control") }}
+                </div>
+                <div class="form-group">
+                  {{ form.email.label(class="form-label mt-3") }}
+                  {{ form.email(class="form-control") }}
+                </div>
+                <div class="form-group">
+                  {{ form.facultad.label(class="form-label mt-3") }}
+                  {{ form.facultad(class="form-control") }}
+                </div>
+                <div class="form-group">
+                  {{ form.carrera.label(class="form-label mt-3") }}
+                  {{ form.carrera(class="form-control") }}
+                </div>
+                <div class="form-group">
+                  {{ form.curso.label(class="form-label mt-3") }}
+                  {{ form.curso(class="form-control") }}
+                </div>
+                <div class="form-group">
+                  {{ form.phone.label(class="form-label mt-3") }}
+                  {{ form.phone(class="form-control") }}
+                </div>
+                  {{ form.total_horas.label(class="form-label mt-3") }}
+                  {{ form.total_horas(class="form-control") }}
+                <div class="row mt-3">
+                  <div class="col d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Crear estudiante</button>
+                  </div>
+                  <div class="col d-grid gap-2">
+                    <a href="/" class="btn btn-danger btn-lg btn-block">Cancelar</a>
+                  </div>
+                </div>
+              </form>
+            {% endif %}
+            </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+{% endblock %}

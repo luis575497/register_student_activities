@@ -9,10 +9,29 @@ Welcome to Register Students Activities documentation!
 Configuración
 -------------------------
 Antes de ejecutar el proyecto deberá configurar la conexión con la base de datos en el archivo `config.py` y modificar la propiedad `SQLALCHEMY_DATABASE_URI` en donde:
-- `mysql+pymysql` : es el conector de python para mysql
-- `root:admin`: es el usuario y la contraseña  respectivamente
-- `@localhost/estudiantes`: es el host y el nombre de la base de datos
+
+- `mysql+pymysql` : es el conector de python para mysql.
+- `root:admin`: es el usuario y la contraseña  respectivamente.
+- `@localhost/estudiantes`: es el host y el nombre de la base de datos.
+
 La base de datos indicada deberá no contener ninguna tabla
+
+.. admonition:: Ejemplo
+
+   Ejemplo de configuración del archivo `config.py`
+
+   .. code-block:: python
+
+    class Config(object):
+         DEBUG = False
+         SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root@localhost/estudiantes"
+         SQLALCHEMY_TRACK_MODIFICATIONS = False
+         TESTING = True
+         DEBUG = True
+         FLASK_DEBUG = "development"
+         SECRET_KEY = "sdfksdj156165gnsdfnsdonfs"
+         TEMPLATES_FOLDER = "templates"
+         PERMANENT_SESSION_LIFETIME = timedelta(minutes=5)
 
 Instalación
 --------------------------

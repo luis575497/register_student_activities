@@ -1,6 +1,6 @@
 """
 Submódulo de Autenticación (routes)
-=================================
+=====================================
 
 Este módulo contiene todas las rutas definidas y configuraciones necesaria para
 manejar la autenticación del usuario.
