@@ -1,3 +1,15 @@
+"""
+Submódulo de Bibliotecario (routes)
+=================================
+
+Este módulo contiene todas las rutas definidas para realizar con el usuario (bibliotecario):
+
+- Dashboard bibliotecario
+- Modificar datos del bibliotecario
+- Generar informe sobre el bibliotecario
+- Cambiar la contraseña del bibliotecario
+"""
+
 from flask_login import current_user
 from flask import render_template, request, flash, redirect, url_for, make_response
 from app.forms.forms import BibliotecarioForm, SeleccionarMes
@@ -14,7 +26,22 @@ from app import app, db
 
 @app.route("/bibliotecario", methods=["GET"])
 @login_required
-def bibliotecario():
+def bibliotecario() -> str:
+    """
+    Datos bibliotecario
+
+    Cuando se envía una petición GET hacia la ruta ``/bibliotecario>/`` se envían los
+    datos necesarios para generar el dashboard del bibliotecario.
+
+    Returns
+    -------
+    str
+        Renderizado de la plantilla ``bibliotecario.html`` con los datos obtenidos previamente
+
+    Notes
+    -----
+    Para ejecutar esta ruta se requiere que el usuario se encuentra autenticado en el sistema
+    """
     fecha_actual = datetime.now()
     actividades = (
         Actividad.query.filter(Actividad.fecha > fecha_actual - timedelta(days=30))

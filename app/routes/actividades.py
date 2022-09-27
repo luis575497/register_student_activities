@@ -3,6 +3,7 @@ Submódulo de Actividades (routes)
 =================================
 
 Este módulo contiene todas las rutas definidas para realizar con una actividad:
+
 - Agregar una nueva activiadad
 - Eliminar una actividad existente
 - Obtener los datos de una actividad existente
