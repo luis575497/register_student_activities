@@ -15,9 +15,8 @@ from app.schemas.estudiante import Estudiante
 from flask_login import login_required
 from app.routes.estudiante import *
 from app.routes.actividades import *
-from app.routes.buscador import *
+from app.routes.utils import *
 from app.routes.auth import *
-from app.routes.certificado import *
 from app.routes.bibliotecario import *
 
 

@@ -58,6 +58,7 @@ def add_student() -> Response:
         return redirect(url_for("index"))
 
     except IntegrityError:
+        db.session.rollback()
         flash(
             f"El estudiante ya se encuentra en la base de datos, por favor relice una búsqueda por el número de cédula",
             "error",
